@@ -84,12 +84,8 @@ window.renderStatistics = function (ctx, names, times) {
     colorPlayer: 'rgba(255, 0, 0, 1)',
   };
 
-  console.log('Входное время: ' + times);
-  console.log('Входные имена: ' + names);
   var indexes = sortIndexes(times);
   var sortedNames = sortNames(indexes, names);
-  console.log('Отсортированное время: ' + times);
-  console.log('Отсортированные имена: ' + sortedNames);
   for (var i = 0; i < times.length; i++) {
     if (sortedNames[i] === 'Вы') {
       ctx.fillStyle = histogramParameters.colorPlayer;
