@@ -25,38 +25,6 @@ var writeScores = function (obj, ctx, time, name, index) {
   ctx.fillText(name, obj.initialX + obj.indent * index, obj.initialYName);
 };
 
-var sortIndexes = function (array) {
-  var indexes = [];
-  for (var i = 0; i < array.length; i++) {
-    indexes[i] = i;
-  }
-  for (var currentIndex = 0; currentIndex < array.length - 1; currentIndex++) {
-    var minElement = array[currentIndex];
-    var indexCurrentElement = indexes[currentIndex];
-    for (var j = currentIndex + 1; j < array.length; j++) {
-      if (minElement > array[j]) {
-        minElement = array[j];
-        indexCurrentElement = indexes[j];
-        var mainSwap = array[currentIndex];
-        var indexSwap = indexes[currentIndex];
-        array[currentIndex] = minElement;
-        indexes[currentIndex] = indexCurrentElement;
-        array[j] = mainSwap;
-        indexes[j] = indexSwap;
-      }
-    }
-  }
-  return indexes;
-};
-
-var sortNames = function (mainArray, dependentArray) {
-  var sortedNames = [];
-  for (var i = 0; i < mainArray.length; i++) {
-    sortedNames[i] = dependentArray[mainArray[i]];
-  }
-  return sortedNames;
-};
-
 window.renderStatistics = function (ctx, names, times) {
   var gradient = ctx.createLinearGradient(100, 10, 420, 270);
   gradient.addColorStop(0, '#ffffff');
@@ -81,13 +49,10 @@ window.renderStatistics = function (ctx, names, times) {
     height: 150,
     width: 40,
     indent: 90,
-    colorPlayer: 'rgba(255, 0, 0, 1)',
+    colorPlayer: 'rgba(255, 0, 0, 1)'
   };
-
-  var indexes = sortIndexes(times);
-  var sortedNames = sortNames(indexes, names);
   for (var i = 0; i < times.length; i++) {
-    if (sortedNames[i] === 'Вы') {
+    if (names[i] === 'Вы') {
       ctx.fillStyle = histogramParameters.colorPlayer;
     } else {
       ctx.fillStyle = 'rgba(0, 0, 255, ' + getRandomArbitrary(0.2, 1) + ')';
@@ -96,6 +61,6 @@ window.renderStatistics = function (ctx, names, times) {
     histogramParameters.initialYScore = Math.round(235 - times[i] * histogramParameters.step);
     histogramParameters.initialY = Math.round(240 - times[i] * histogramParameters.step);
     drawPlot(histogramParameters, times[i], i, ctx);
-    writeScores(histogramParameters, ctx, times[i], sortedNames[i], i);
+    writeScores(histogramParameters, ctx, times[i], names[i], i);
   }
 };
