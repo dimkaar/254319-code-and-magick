@@ -55,7 +55,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   var step = histogramParameters.height / getMaxElement(times);
   for (var i = 0; i < times.length; i++) {
-    ctx.fillStyle = names[i] === 'Вы' ? histogramParameters.colorPlayer : ctx.fillStyle = 'rgba(0, 0, 255, ' + getRandomArbitrary(0.2, 1) + ')';
+    ctx.fillStyle = names[i] === 'Вы' ? histogramParameters.colorPlayer : 'rgba(0, 0, 255, ' + getRandomArbitrary(0.2, 1) + ')';
     histogramParameters.initialYScore = Math.round(235 - times[i] * step);
     histogramParameters.initialY = Math.round(240 - times[i] * step);
     drawPlot(ctx, times[i], step, i);
