@@ -9,8 +9,8 @@ var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var wizardTemplate = document.querySelector('#similar-wizard-template').content;
 var wizards = [];
 
-var getRandomElement = function (wizardParameterArray) {
-  return wizardParameterArray[Math.floor(Math.random() * wizardParameterArray.length)];
+var getRandomElement = function (parameterArray) {
+  return parameterArray[Math.floor(Math.random() * parameterArray.length)];
 };
 
 var generateWizardsData = function (numberOfWizards) {
