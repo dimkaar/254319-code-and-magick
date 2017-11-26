@@ -33,11 +33,11 @@ var renderWizard = function (wizard) {
 
 generateWizardsData(4);
 
-var wizardList = document.querySelector('.setup-similar-list');
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < wizards.length; i++) {
   fragment.appendChild(renderWizard(wizards[i]));
 }
+var wizardList = document.querySelector('.setup-similar-list');
 wizardList.appendChild(fragment);
 
 var setupWindow = document.querySelector('.setup');
