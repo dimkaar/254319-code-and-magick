@@ -5,6 +5,7 @@ var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'К
 var WIZARD_FAMILIES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 137)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 var ENTER_KEYCODE = 13;
 var ESC_KEYCODE = 27;
 
@@ -35,8 +36,10 @@ var renderWizard = function (wizard) {
 };
 
 var onPopupEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
-    closeSetupWindow();
+  if (document.activeElement !== userNameField) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      closeSetupWindow();
+    }
   }
 };
 
@@ -52,6 +55,14 @@ var closeSetupWindow = function () {
 
 var submitForm = function () {
   setupWizardForm.submit();
+};
+
+var changeSvgColor = function (element, colorsArray) {
+  element.style.fill = getRandomElement(colorsArray);
+};
+
+var changeBackgroundColor = function (element, colorsArray) {
+  element.style.background = getRandomElement(colorsArray);
 };
 
 generateWizardsData(4);
@@ -70,6 +81,7 @@ wizardSetup.classList.remove('hidden');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setupWindow.querySelector('.setup-close');
 var setupSubmit = setupWindow.querySelector('.setup-submit');
+var userNameField = setupWindow.querySelector('.setup-user-name');
 var setupWizardForm = setupWindow.querySelector('.setup-wizard-form');
 
 setupOpen.addEventListener('click', openSetupWindow);
@@ -88,12 +100,25 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-setupSubmit.addEventListener('click', function () {
-  submitForm();
-});
+setupSubmit.addEventListener('click', submitForm);
 
 setupSubmit.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     submitForm();
   }
+});
+
+var wizardCoat = setupWindow.querySelector('.wizard-coat');
+wizardCoat.addEventListener('click', function () {
+  changeSvgColor(wizardCoat, COAT_COLORS);
+});
+
+var wizardEyes = setupWindow.querySelector('.wizard-eyes');
+wizardEyes.addEventListener('click', function () {
+  changeSvgColor(wizardEyes, EYES_COLORS);
+});
+
+var fireball = setupWindow.querySelector('.setup-fireball-wrap');
+fireball.addEventListener('click', function () {
+  changeBackgroundColor(fireball, FIREBALL_COLORS);
 });
