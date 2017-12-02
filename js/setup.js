@@ -83,6 +83,12 @@ var setupClose = setupWindow.querySelector('.setup-close');
 var setupSubmit = setupWindow.querySelector('.setup-submit');
 var userNameField = setupWindow.querySelector('.setup-user-name');
 var setupWizardForm = setupWindow.querySelector('.setup-wizard-form');
+var setupOpenIcon = setupOpen.querySelector('.setup-open-icon');
+setupOpenIcon.tabIndex = 0;
+setupWizardForm.action = 'https://js.dump.academy/code-and-magick';
+userNameField.minLength = 2;
+setupClose.tabIndex = 0;
+
 
 setupOpen.addEventListener('click', openSetupWindow);
 
